@@ -99,11 +99,11 @@ h2.title{font-size:clamp(24px,3.4vw,32px); font-weight:600; margin:0 0 12px;}
 .feed-tile{position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:4px; cursor:pointer; background:var(--hairline-2);}
 .feed-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .25s ease;}
 .feed-tile:hover img{transform:scale(1.05);}
-.feed-tile .tile-badge{
+.tile-badge{
   position:absolute; top:6px; right:6px; width:22px; height:22px; border-radius:50%;
   background:rgba(0,0,0,0.55); display:flex; align-items:center; justify-content:center;
 }
-.feed-tile .tile-badge svg{width:11px; height:11px; fill:#fff;}
+.tile-badge svg{width:11px; height:11px; fill:#fff; color:#fff;}
 .feed-legend{margin-top:20px; font-size:13px; color:var(--ink-faint); display:flex; gap:24px; flex-wrap:wrap;}
 .feed-legend span{display:inline-flex; align-items:center; gap:6px;}
 .feed-legend .dot{width:8px; height:8px; border-radius:50%;}
@@ -182,6 +182,13 @@ footer .fine{font-size:12.5px; color:var(--ink-faint); border-top:1px solid var(
 .modal-box .m-title{font-family:"Lora",serif; font-size:22px; font-weight:600; margin:0 0 6px;}
 .modal-box .m-meta{font-size:13px; color:var(--ink-faint); margin-bottom:18px;}
 .modal-box .m-caption{font-size:14.5px; color:var(--ink-soft); line-height:1.65; white-space:pre-line; margin-bottom:24px;}
+.modal-box .m-thumbs{display:flex; gap:8px; flex-wrap:wrap; margin:-8px 0 20px;}
+.modal-box .m-thumbs img{
+  width:48px; height:48px; object-fit:cover; border-radius:8px; cursor:pointer;
+  border:2px solid transparent; opacity:0.6;
+}
+.modal-box .m-thumbs img:hover{opacity:0.85;}
+.modal-box .m-thumbs img.active{border-color:var(--accent); opacity:1;}
 .modal-box .m-actions{display:flex; gap:10px; flex-wrap:wrap;}
 
 @media (max-width:640px){

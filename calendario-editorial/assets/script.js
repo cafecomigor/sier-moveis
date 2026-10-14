@@ -13,6 +13,10 @@
   var STATUS_LABEL = { published: "Publicado", approved: "Aprovado", script: "Roteiro aprovado" };
 
   var PLAY_SVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  var CAROUSEL_SVG = '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="13" rx="2" fill="currentColor" opacity="0.55"/><rect x="8" y="3" width="13" height="13" rx="2" fill="currentColor"/></svg>';
+
+  function imagesOf(post) { return post.images && post.images.length ? post.images : [post.image]; }
+  function extOf(path) { var m = /\.([a-z0-9]+)$/i.exec(path); return m ? m[1] : "jpg"; }
 
   function byDateAsc(a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }
   function byDateDesc(a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; }
@@ -54,7 +58,7 @@
     var f = document.getElementById("featured-block");
     if (featured) {
       f.style.display = "";
-      f.querySelector(".f-img").src = featured.image;
+      f.querySelector(".f-img").src = imagesOf(featured)[0];
       f.querySelector(".f-title").textContent = featured.title;
       f.querySelector(".f-meta").textContent = fmtDate(featured.date) + " · " + featured.pillar;
       f.onclick = function () { openModal(featured.id); };
@@ -67,6 +71,9 @@
     if (post.type === "video") {
       return '<span class="tile-badge">' + PLAY_SVG + "</span>";
     }
+    if (imagesOf(post).length > 1) {
+      return '<span class="tile-badge">' + CAROUSEL_SVG + "</span>";
+    }
     return "";
   }
 
@@ -78,7 +85,7 @@
     } else {
       grid.innerHTML = sorted.map(function (p) {
         return '<div class="feed-tile" data-id="' + p.id + '">' +
-          '<img src="' + p.image + '" alt="' + p.title + '" loading="lazy">' +
+          '<img src="' + imagesOf(p)[0] + '" alt="' + p.title + '" loading="lazy">' +
           tileBadge(p) +
           "</div>";
       }).join("");
@@ -119,7 +126,8 @@
     } else {
       grid.innerHTML = sorted.map(function (p) {
         return '<div class="cal-card" data-id="' + p.id + '">' +
-          '<div class="cc-thumb"><img src="' + p.image + '" alt="' + p.title + '" loading="lazy">' +
+          '<div class="cc-thumb"><img src="' + imagesOf(p)[0] + '" alt="' + p.title + '" loading="lazy">' +
+          tileBadge(p) +
           '<span class="cc-status">' + STATUS_LABEL[p.status] + "</span></div>" +
           '<div class="cc-body"><div class="cc-date">' + fmtDate(p.date) + " · " + (p.type === "video" ? "Vídeo" : "Card") + '</div>' +
           '<div class="cc-title">' + p.title + "</div></div>" +
@@ -161,16 +169,42 @@
   function openModal(id) {
     var post = D.posts.filter(function (p) { return p.id === id; })[0];
     if (!post) return;
+    var imgs = imagesOf(post);
     var overlay = document.getElementById("modal-overlay");
-    overlay.querySelector(".m-img img").src = post.image;
-    overlay.querySelector(".m-status").textContent = STATUS_LABEL[post.status];
+    var mainImg = overlay.querySelector(".m-img img");
+    mainImg.src = imgs[0];
+    overlay.querySelector(".m-status").textContent = STATUS_LABEL[post.status] + (imgs.length > 1 ? " · carrossel (" + imgs.length + " fotos)" : "");
     overlay.querySelector(".m-title").textContent = post.title;
     overlay.querySelector(".m-meta").textContent = fmtDateLong(post.date) + " · " + post.pillar;
     overlay.querySelector(".m-caption").textContent = post.caption;
 
+    var thumbRow = overlay.querySelector(".m-thumbs");
+    if (imgs.length > 1) {
+      thumbRow.style.display = "flex";
+      thumbRow.innerHTML = imgs.map(function (src, i) {
+        return '<img src="' + src + '" data-i="' + i + '" class="' + (i === 0 ? "active" : "") + '">';
+      }).join("");
+      thumbRow.querySelectorAll("img").forEach(function (t) {
+        t.addEventListener("click", function () {
+          mainImg.src = t.src;
+          thumbRow.querySelectorAll("img").forEach(function (o) { o.classList.remove("active"); });
+          t.classList.add("active");
+        });
+      });
+    } else {
+      thumbRow.style.display = "none";
+      thumbRow.innerHTML = "";
+    }
+
     var actions = overlay.querySelector(".m-actions");
     if (post.type === "card") {
-      actions.innerHTML = '<a class="btn primary" href="' + post.image + '" download="' + slug(post.title) + '.svg">Baixar arte ↓</a>';
+      if (imgs.length > 1) {
+        actions.innerHTML = imgs.map(function (src, i) {
+          return '<a class="btn primary" href="' + src + '" download="' + slug(post.title) + "-" + (i + 1) + "." + extOf(src) + '">Baixar foto ' + (i + 1) + " ↓</a>";
+        }).join("");
+      } else {
+        actions.innerHTML = '<a class="btn primary" href="' + imgs[0] + '" download="' + slug(post.title) + "." + extOf(imgs[0]) + '">Baixar arte ↓</a>';
+      }
     } else {
       actions.innerHTML = '<button class="btn primary" id="download-script">Baixar roteiro ↓</button>';
       actions.querySelector("#download-script").addEventListener("click", function () {
@@ -211,11 +245,16 @@
       btn.textContent = "Preparando…";
       var zip = new JSZip();
       var cardPosts = D.posts.filter(function (p) { return p.type === "card"; });
-      Promise.all(cardPosts.map(function (p) {
-        return fetch(p.image).then(function (r) { return r.blob(); }).then(function (blob) {
-          zip.file(slug(p.title) + ".svg", blob);
+      var jobs = [];
+      cardPosts.forEach(function (p) {
+        imagesOf(p).forEach(function (src, i) {
+          var name = imagesOf(p).length > 1 ? slug(p.title) + "-" + (i + 1) + "." + extOf(src) : slug(p.title) + "." + extOf(src);
+          jobs.push(fetch(src).then(function (r) { return r.blob(); }).then(function (blob) {
+            zip.file(name, blob);
+          }));
         });
-      })).then(function () {
+      });
+      Promise.all(jobs).then(function () {
         return zip.generateAsync({ type: "blob" });
       }).then(function (blob) {
         var url = URL.createObjectURL(blob);
