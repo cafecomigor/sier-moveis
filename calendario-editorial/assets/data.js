@@ -29,10 +29,10 @@ const CALENDAR_DATA = {
 
   posts: [
     { id: 1, date: "2026-10-15", type: "card", status: "approved", pillar: "Roberta", title: "Roberta — Post 1", caption: "Legenda a definir.", images: ["images/roberta-1.png"] },
-    { id: 2, date: "2026-10-17", type: "card", status: "approved", pillar: "Soma",    title: "Soma — Post 1",    caption: "Legenda a definir.", images: ["images/soma-1.png"] },
-    { id: 3, date: "2026-10-19", type: "card", status: "approved", pillar: "Roberta", title: "Roberta — Post 2", caption: "Legenda a definir.", images: ["images/roberta-2.png"] },
-    { id: 4, date: "2026-10-21", type: "card", status: "approved", pillar: "Soma",    title: "Soma — Post 2",    caption: "Legenda a definir.", images: ["images/soma-2-1.png", "images/soma-2-2.png"] },
-    { id: 5, date: "2026-10-23", type: "card", status: "approved", pillar: "Roberta", title: "Roberta — Post 3", caption: "Legenda a definir.", images: ["images/roberta-3-1.png", "images/roberta-3-2.png"] },
+    { id: 2, date: "2026-10-17", type: "card", status: "approved", pillar: "Roberta", title: "Roberta — Post 2", caption: "Legenda a definir.", images: ["images/roberta-2.png"] },
+    { id: 3, date: "2026-10-19", type: "card", status: "approved", pillar: "Roberta", title: "Roberta — Post 3", caption: "Legenda a definir.", images: ["images/roberta-3-1.png", "images/roberta-3-2.png"] },
+    { id: 4, date: "2026-10-21", type: "card", status: "approved", pillar: "Soma",    title: "Soma — Post 1",    caption: "Legenda a definir.", images: ["images/soma-1.png"] },
+    { id: 5, date: "2026-10-23", type: "card", status: "approved", pillar: "Soma",    title: "Soma — Post 2",    caption: "Legenda a definir.", images: ["images/soma-2-1.png", "images/soma-2-2.png"] },
     { id: 6, date: "2026-10-26", type: "card", status: "approved", pillar: "Soma",    title: "Soma — Post 3",    caption: "Legenda a definir.", images: ["images/soma-3.png"] }
   ],
 
