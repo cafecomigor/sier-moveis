@@ -235,14 +235,30 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
   }
 
+  function loadJSZip() {
+    if (typeof JSZip !== "undefined") return Promise.resolve();
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error("jszip failed to load")); };
+      document.head.appendChild(s);
+    });
+  }
+
   function wireZipDownload() {
     var btn = document.getElementById("download-all");
     if (!btn) return;
     btn.addEventListener("click", function () {
-      if (typeof JSZip === "undefined") { alert("Não foi possível carregar o gerador de ZIP."); return; }
       btn.disabled = true;
       var original = btn.textContent;
       btn.textContent = "Preparando…";
+      loadJSZip().then(startZip).catch(function () {
+        alert("Não foi possível carregar o gerador de ZIP agora. Baixe as artes uma a uma pelo calendário.");
+        btn.disabled = false; btn.textContent = original;
+      });
+
+      function startZip() {
       var zip = new JSZip();
       var cardPosts = D.posts.filter(function (p) { return p.type === "card"; });
       var jobs = [];
@@ -267,6 +283,7 @@
         alert("Não foi possível gerar o ZIP agora.");
         btn.disabled = false; btn.textContent = original;
       });
+      }
     });
   }
 
@@ -281,17 +298,34 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
+  function showFatalError(detail) {
+    var bar = document.createElement("div");
+    bar.style.cssText = "background:#c0392b;color:#fff;padding:14px 20px;text-align:center;font-family:sans-serif;font-size:14px;";
+    bar.textContent = "Não foi possível carregar os dados do calendário. Recarregue a página — se continuar, avise o Cafecomigor." + (detail ? " (" + detail + ")" : "");
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+
+  function safe(label, fn) {
+    try { fn(); } catch (err) {
+      if (window.console) console.error("[calendario] falhou em " + label + ":", err);
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
-    applyBrand();
-    renderNav();
-    renderHero();
-    renderFeed();
-    renderPillars();
-    wireCalFilters();
-    renderCalendar("all");
-    renderSummary();
-    wireModal();
-    wireZipDownload();
-    revealOnScroll();
+    if (typeof CALENDAR_DATA === "undefined") {
+      showFatalError("data.js não carregou");
+      return;
+    }
+    safe("applyBrand", applyBrand);
+    safe("renderNav", renderNav);
+    safe("renderHero", renderHero);
+    safe("renderFeed", renderFeed);
+    safe("renderPillars", renderPillars);
+    safe("wireCalFilters", wireCalFilters);
+    safe("renderCalendar", function () { renderCalendar("all"); });
+    safe("renderSummary", renderSummary);
+    safe("wireModal", wireModal);
+    safe("wireZipDownload", wireZipDownload);
+    safe("revealOnScroll", revealOnScroll);
   });
 })();
