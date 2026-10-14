@@ -3,143 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Calendário Editorial — Modelo</title>
-<meta name="description" content="Modelo reaproveitável de calendário editorial interativo para clientes.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+<title>Sier Móveis — Calendário Editorial</title>
+<style>
+  :root{
+    --accent: #8a5a3b;
+    --bg: #f7f7f5;
+    --card: #ffffff;
+    --ink: #1c1c1a;
+    --ink-soft: #5c5c57;
+    --ink-faint: #8c8c86;
+    --hairline: #e4e2dd;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 20px;}
+  header{padding:48px 0 32px; border-bottom:1px solid var(--hairline);}
+  header .kicker{
+    font-size:12px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 10px;
+  }
+  header h1{font-size:30px; margin:0 0 10px;}
+  header p{color:var(--ink-soft); font-size:15px; margin:0; line-height:1.6;}
+
+  .legend{display:flex; gap:20px; flex-wrap:wrap; padding:20px 0; font-size:13px; color:var(--ink-faint); border-bottom:1px solid var(--hairline); margin-bottom:8px;}
+  .legend b{color:var(--ink);}
+
+  .post{
+    display:flex; gap:24px; padding:36px 0; border-bottom:1px solid var(--hairline);
+  }
+  .post .imgs{display:flex; gap:8px; flex:0 0 auto;}
+  .post .imgs img{
+    width:140px; height:175px; object-fit:cover; border-radius:10px; border:1px solid var(--hairline); display:block;
+  }
+  .post .info{flex:1 1 auto; min-width:0;}
+  .post .date-badge{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.04em;
+    color:#fff; background:var(--accent); padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .post .pillar{font-size:12px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;}
+  .post h2{font-size:19px; margin:0 0 10px;}
+  .post .caption{
+    font-size:14.5px; color:var(--ink-soft); line-height:1.65; white-space:pre-line; margin:0 0 16px; max-width:560px;
+  }
+  .post .downloads{display:flex; gap:10px; flex-wrap:wrap;}
+  .post .downloads a{
+    display:inline-block; font-size:13px; font-weight:600; color:var(--accent);
+    border:1px solid var(--accent); border-radius:999px; padding:7px 16px; text-decoration:none;
+  }
+  .post .downloads a:hover{background:var(--accent); color:#fff;}
+
+  @media (max-width:560px){
+    .post{flex-direction:column; gap:14px;}
+    .post .imgs{flex-direction:row; flex-wrap:wrap;}
+    .post .imgs img{width:120px; height:150px;}
+  }
+
+  footer{padding:40px 0 60px; text-align:center; font-size:12.5px; color:var(--ink-faint);}
+</style>
 </head>
 <body>
 
-<nav class="topnav">
-  <div class="wrap">
-    <div class="brand">
-      <span class="mark" id="brand-mark">—</span>
-      <span id="brand-name">Carregando…</span>
+<div class="wrap">
+
+  <header>
+    <p class="kicker">Planejamento editorial · Outubro 2026</p>
+    <h1>Sier Móveis — Calendário Editorial</h1>
+    <p>Cronograma de publicações das coleções Roberta e Soma — três posts por semana, começando quinta-feira 15/10.</p>
+  </header>
+
+  <div class="legend">
+    <span><b>6</b> posts programados</span>
+    <span><b>3x</b> por semana (qui/sáb, depois seg/qua/sex)</span>
+    <span><b>Roberta</b> primeiro, depois <b>Soma</b></span>
+  </div>
+
+  <div class="post">
+    <div class="imgs">
+      <img src="images/roberta-1.png" alt="Roberta — A Delicadeza">
     </div>
-    <div class="navlinks">
-      <a href="#feed">Feed</a>
-      <a href="#linha-editorial">Linha editorial</a>
-      <a href="#calendario">Calendário</a>
-      <a href="#resumo">Resumo</a>
+    <div class="info">
+      <span class="date-badge">Qui · 15/10/2026</span>
+      <div class="pillar">Roberta — Post 1</div>
+      <h2>A Delicadeza</h2>
+      <p class="caption">Existem momentos em que observar é o bastante. Com a Roberta, é preciso sentir. O encosto nasce de uma única curva, contínua e acabada com tanta delicadeza que o olhar desliza e a mão decide ficar. Sem arestas. Sem pressa. Um desenho que se compreende pelo toque.
+
+Roberta. Feita para ser sentida.</p>
+      <div class="downloads"><a href="images/roberta-1.png" download>Baixar imagem ↓</a></div>
     </div>
   </div>
-</nav>
 
-<header class="hero">
-  <div class="wrap">
-    <p class="kicker" id="hero-period-label">Planejamento editorial</p>
-    <h1 id="hero-headline">—</h1>
-    <p class="intro" id="hero-intro"></p>
-    <div class="period-row"><span class="dot"></span><span id="hero-period-range"></span></div>
-
-    <div class="stat-row">
-      <div class="stat"><div class="s-val" id="stat-total">0</div><div class="s-label">itens no calendário</div></div>
-      <div class="stat"><div class="s-val" id="stat-cards">0</div><div class="s-label">cards</div></div>
-      <div class="stat"><div class="s-val" id="stat-videos">0</div><div class="s-label">vídeos a produzir</div></div>
+  <div class="post">
+    <div class="imgs">
+      <img src="images/roberta-2.png" alt="Roberta — A Apresentação">
     </div>
+    <div class="info">
+      <span class="date-badge">Sáb · 17/10/2026</span>
+      <div class="pillar">Roberta — Post 2</div>
+      <h2>A Apresentação</h2>
+      <p class="caption">Apresentamos a Roberta.
 
-    <a class="btn primary" href="#calendario">Explorar o calendário</a>
+Uma cadeira de presença serena. Estrutura em madeira de linhas leves, assento estofado e proporções desenhadas para a mesa e, na mesma medida, para o olhar. Um design atemporal que dispensa explicações e, simplesmente, permanece.
 
-    <div class="featured" id="featured-block" style="cursor:pointer;">
-      <img class="f-img" src="" alt="">
-      <div>
-        <div class="f-label">Próxima publicação</div>
-        <div class="f-title"></div>
-        <div class="f-meta"></div>
+Roberta.</p>
+      <div class="downloads"><a href="images/roberta-2.png" download>Baixar imagem ↓</a></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <div class="imgs">
+      <img src="images/roberta-3-1.png" alt="Roberta — O Ritmo (1)">
+      <img src="images/roberta-3-2.png" alt="Roberta — O Ritmo (2)">
+    </div>
+    <div class="info">
+      <span class="date-badge">Seg · 19/10/2026</span>
+      <div class="pillar">Roberta — Post 3 · Carrossel (2 fotos)</div>
+      <h2>O Ritmo</h2>
+      <p class="caption">Uma. Depois outra. Depois cinco.
+
+A cadeira Roberta entrega o que é o verdadeiro ritmo: a mesma curva no encosto, a mesma leveza nas pernas, a mesma elegância em cadência. Em uma mesa posta, ela deixa de ser apenas uma peça e vira arquitetura. Um único desenho. Múltiplas composições.
+
+Roberta.</p>
+      <div class="downloads">
+        <a href="images/roberta-3-1.png" download>Baixar foto 1 ↓</a>
+        <a href="images/roberta-3-2.png" download>Baixar foto 2 ↓</a>
       </div>
     </div>
   </div>
-</header>
 
-<section class="alt" id="feed">
-  <div class="wrap reveal">
-    <p class="kicker">Prévia</p>
-    <h2 class="title">Como o feed vai ficar.</h2>
-    <p class="section-intro">Simulação do grid do Instagram, do mais recente pro mais antigo — pra visualizar o conjunto antes de publicar.</p>
-
-    <div class="feed-filters">
-      <span class="chip active">Todos (<span id="feed-count">0</span>)</span>
+  <div class="post">
+    <div class="imgs">
+      <img src="images/soma-1.png" alt="Soma — O Detalhe">
     </div>
+    <div class="info">
+      <span class="date-badge">Qua · 21/10/2026</span>
+      <div class="pillar">Soma — Post 1</div>
+      <h2>O Detalhe</h2>
+      <p class="caption">No Soma, o detalhe é o discurso.
 
-    <div class="feed-grid" id="feed-grid"></div>
+Sobre a laca off white, um recorte sutil dispensa o puxador e convida ao gesto. Duas texturas, um único encontro, nenhum ruído visual.
 
-    <div class="feed-legend">
-      <span><span class="dot" style="background:var(--accent);"></span>Cards são a arte final aprovada</span>
-      <span><span class="dot" style="background:#141414;"></span>Vídeos têm roteiro aprovado, produção pendente</span>
+Soma. Quando o silêncio também é design.</p>
+      <div class="downloads"><a href="images/soma-1.png" download>Baixar imagem ↓</a></div>
     </div>
   </div>
-</section>
 
-<section id="linha-editorial">
-  <div class="wrap reveal">
-    <p class="kicker">Linha editorial</p>
-    <h2 class="title">Informar. Aproximar. Convidar ao cuidado.</h2>
-    <p class="section-intro">Os pilares que organizam o conteúdo do mês — cada um com seu próprio objetivo e seus próprios posts.</p>
-    <div class="pillars-grid" id="pillars-grid"></div>
-  </div>
-</section>
-
-<section class="alt" id="calendario">
-  <div class="wrap reveal">
-    <p class="kicker">Calendário editorial</p>
-    <h2 class="title">Peça por peça.</h2>
-    <p class="section-intro">Clique em qualquer post pra ver a arte (ou o roteiro), a legenda completa e baixar o material.</p>
-
-    <div class="cal-filters" id="cal-filters">
-      <span class="chip active" data-filter="all">Todos (<span id="cal-count-all">0</span>)</span>
-      <span class="chip" data-filter="card">Cards (<span id="cal-count-card">0</span>)</span>
-      <span class="chip" data-filter="video">Vídeos (<span id="cal-count-video">0</span>)</span>
+  <div class="post">
+    <div class="imgs">
+      <img src="images/soma-2-1.png" alt="Soma — O Conceito (1)">
+      <img src="images/soma-2-2.png" alt="Soma — O Conceito (2)">
     </div>
+    <div class="info">
+      <span class="date-badge">Sex · 23/10/2026</span>
+      <div class="pillar">Soma — Post 2 · Carrossel (2 fotos)</div>
+      <h2>O Conceito</h2>
+      <p class="caption">Soma não é só um nome. É o princípio construtivo.
 
-    <div class="cal-grid" id="cal-grid"></div>
-  </div>
-</section>
+Os tons amadeirados que aquecem, a laca off white que acalma, o aço carbono que sustenta. Cada matéria é inteira por si e, juntas, revelam algo maior do que a soma das partes. Por fora, a calma de uma superfície contínua. Por dentro, a nobreza da madeira que se revela quando as portas se abrem.
 
-<section id="resumo">
-  <div class="wrap reveal">
-    <p class="kicker">Resumo</p>
-    <h2 class="title">O planejamento reunido.</h2>
-    <div class="summary-grid">
-      <div class="summary-list">
-        <div class="summary-row"><span class="sr-label">Posts publicados</span><span class="sr-val" id="sum-published">0</span></div>
-        <div class="summary-row"><span class="sr-label">Cards aprovados</span><span class="sr-val" id="sum-approved">0</span></div>
-        <div class="summary-row"><span class="sr-label">Vídeos a produzir</span><span class="sr-val" id="sum-videos">0</span></div>
-        <div class="summary-row"><span class="sr-label">Próxima publicação</span><span class="sr-val" id="sum-next">—</span></div>
-        <div class="summary-row"><span class="sr-label">Dias prioritários</span><span class="sr-val" id="sum-priority">—</span></div>
-      </div>
-      <div>
-        <p style="margin-top:0;">Baixe de uma vez todas as artes de card já aprovadas neste período.</p>
-        <button class="btn primary" id="download-all">Baixar todas as artes (.zip) ↓</button>
+Soma. Matéria que se completa.</p>
+      <div class="downloads">
+        <a href="images/soma-2-1.png" download>Baixar foto 1 ↓</a>
+        <a href="images/soma-2-2.png" download>Baixar foto 2 ↓</a>
       </div>
     </div>
   </div>
-</section>
 
-<footer>
-  <div class="wrap">
-    <a class="back-top" href="#">↑ Voltar ao início</a>
-    <p class="fine"><span id="footer-client"></span> · Produção: <span id="footer-production"></span></p>
-  </div>
-</footer>
+  <div class="post">
+    <div class="imgs">
+      <img src="images/soma-3.png" alt="Soma — A Proporção">
+    </div>
+    <div class="info">
+      <span class="date-badge">Seg · 26/10/2026</span>
+      <div class="pillar">Soma — Post 3</div>
+      <h2>A Proporção</h2>
+      <p class="caption">Proporção não se improvisa.
 
-<div class="modal-overlay" id="modal-overlay">
-  <div class="modal-box">
-    <div class="m-img"><img src="" alt=""></div>
-    <div class="m-body">
-      <button class="modal-close" id="modal-close">✕</button>
-      <span class="m-status"></span>
-      <h3 class="m-title"></h3>
-      <p class="m-meta"></p>
-      <p class="m-caption"></p>
-      <div class="m-thumbs" style="display:none;"></div>
-      <div class="m-actions"></div>
+Do tampo de cantos suaves ao contorno amadeirado que abraça o acabamento em off white. Do pé fino em aço carbono que faz o buffet flutuar, à precisão do seu volume no espaço. O Soma foi desenhado para ser admirado de perto e de longe, de cima e de lado, e continuar exato em todos os ângulos. Uma peça que marca a sala justamente pelo que escolheu não exibir em excesso.
+
+Soma.</p>
+      <div class="downloads"><a href="images/soma-3.png" download>Baixar imagem ↓</a></div>
     </div>
   </div>
+
+  <footer>Cafecomigor · calendário editorial Sier Móveis</footer>
+
 </div>
-
-<script src="assets/data.js"></script>
-<script src="assets/script.js"></script>
 </body>
 </html>
