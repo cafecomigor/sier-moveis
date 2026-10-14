@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calendário Editorial — Modelo</title>
+<meta name="description" content="Modelo reaproveitável de calendário editorial interativo para clientes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="wrap">
+    <div class="brand">
+      <span class="mark" id="brand-mark">—</span>
+      <span id="brand-name">Carregando…</span>
+    </div>
+    <div class="navlinks">
+      <a href="#feed">Feed</a>
+      <a href="#linha-editorial">Linha editorial</a>
+      <a href="#calendario">Calendário</a>
+      <a href="#resumo">Resumo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker" id="hero-period-label">Planejamento editorial</p>
+    <h1 id="hero-headline">—</h1>
+    <p class="intro" id="hero-intro"></p>
+    <div class="period-row"><span class="dot"></span><span id="hero-period-range"></span></div>
+
+    <div class="stat-row">
+      <div class="stat"><div class="s-val" id="stat-total">0</div><div class="s-label">itens no calendário</div></div>
+      <div class="stat"><div class="s-val" id="stat-cards">0</div><div class="s-label">cards</div></div>
+      <div class="stat"><div class="s-val" id="stat-videos">0</div><div class="s-label">vídeos a produzir</div></div>
+    </div>
+
+    <a class="btn primary" href="#calendario">Explorar o calendário</a>
+
+    <div class="featured" id="featured-block" style="cursor:pointer;">
+      <img class="f-img" src="" alt="">
+      <div>
+        <div class="f-label">Próxima publicação</div>
+        <div class="f-title"></div>
+        <div class="f-meta"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="alt" id="feed">
+  <div class="wrap reveal">
+    <p class="kicker">Prévia</p>
+    <h2 class="title">Como o feed vai ficar.</h2>
+    <p class="section-intro">Simulação do grid do Instagram, do mais recente pro mais antigo — pra visualizar o conjunto antes de publicar.</p>
+
+    <div class="feed-filters">
+      <span class="chip active">Todos (<span id="feed-count">0</span>)</span>
+    </div>
+
+    <div class="feed-grid" id="feed-grid"></div>
+
+    <div class="feed-legend">
+      <span><span class="dot" style="background:var(--accent);"></span>Cards são a arte final aprovada</span>
+      <span><span class="dot" style="background:#141414;"></span>Vídeos têm roteiro aprovado, produção pendente</span>
+    </div>
+  </div>
+</section>
+
+<section id="linha-editorial">
+  <div class="wrap reveal">
+    <p class="kicker">Linha editorial</p>
+    <h2 class="title">Informar. Aproximar. Convidar ao cuidado.</h2>
+    <p class="section-intro">Os pilares que organizam o conteúdo do mês — cada um com seu próprio objetivo e seus próprios posts.</p>
+    <div class="pillars-grid" id="pillars-grid"></div>
+  </div>
+</section>
+
+<section class="alt" id="calendario">
+  <div class="wrap reveal">
+    <p class="kicker">Calendário editorial</p>
+    <h2 class="title">Peça por peça.</h2>
+    <p class="section-intro">Clique em qualquer post pra ver a arte (ou o roteiro), a legenda completa e baixar o material.</p>
+
+    <div class="cal-filters" id="cal-filters">
+      <span class="chip active" data-filter="all">Todos (<span id="cal-count-all">0</span>)</span>
+      <span class="chip" data-filter="card">Cards (<span id="cal-count-card">0</span>)</span>
+      <span class="chip" data-filter="video">Vídeos (<span id="cal-count-video">0</span>)</span>
+    </div>
+
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+</section>
+
+<section id="resumo">
+  <div class="wrap reveal">
+    <p class="kicker">Resumo</p>
+    <h2 class="title">O planejamento reunido.</h2>
+    <div class="summary-grid">
+      <div class="summary-list">
+        <div class="summary-row"><span class="sr-label">Posts publicados</span><span class="sr-val" id="sum-published">0</span></div>
+        <div class="summary-row"><span class="sr-label">Cards aprovados</span><span class="sr-val" id="sum-approved">0</span></div>
+        <div class="summary-row"><span class="sr-label">Vídeos a produzir</span><span class="sr-val" id="sum-videos">0</span></div>
+        <div class="summary-row"><span class="sr-label">Próxima publicação</span><span class="sr-val" id="sum-next">—</span></div>
+        <div class="summary-row"><span class="sr-label">Dias prioritários</span><span class="sr-val" id="sum-priority">—</span></div>
+      </div>
+      <div>
+        <p style="margin-top:0;">Baixe de uma vez todas as artes de card já aprovadas neste período.</p>
+        <button class="btn primary" id="download-all">Baixar todas as artes (.zip) ↓</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="back-top" href="#">↑ Voltar ao início</a>
+    <p class="fine"><span id="footer-client"></span> · Produção: <span id="footer-production"></span></p>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="m-img"><img src="" alt=""></div>
+    <div class="m-body">
+      <button class="modal-close" id="modal-close">✕</button>
+      <span class="m-status"></span>
+      <h3 class="m-title"></h3>
+      <p class="m-meta"></p>
+      <p class="m-caption"></p>
+      <div class="m-actions"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/script.js"></script>
+</body>
+</html>
