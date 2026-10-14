@@ -30,6 +30,30 @@
   header h1{font-size:30px; margin:0 0 10px;}
   header p{color:var(--ink-soft); font-size:15px; margin:0; line-height:1.6;}
 
+  section{padding:40px 0; border-bottom:1px solid var(--hairline);}
+  section .s-kicker{
+    font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 6px;
+  }
+  section h2{font-size:21px; margin:0 0 8px;}
+  section .s-sub{color:var(--ink-soft); font-size:14px; margin:0 0 24px; line-height:1.6;}
+
+  /* ---------- prévia do feed ---------- */
+  .feed-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:5px;}
+  .feed-grid a{display:block;}
+  .feed-grid img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border-radius:3px;}
+
+  /* ---------- calendário ---------- */
+  .cal-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .cal-table{display:grid; grid-template-columns:repeat(7,1fr); gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:12px; overflow:hidden; min-width:640px;}
+  .cal-head{background:var(--card); padding:10px 6px; text-align:center; font-size:11.5px; font-weight:700; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.04em;}
+  .cal-cell{background:var(--card); min-height:108px; padding:8px; position:relative;}
+  .cal-cell.empty{background:var(--bg);}
+  .cal-daynum{font-size:12px; color:var(--ink-faint); margin-bottom:6px;}
+  .cal-post{display:block; text-decoration:none; color:inherit;}
+  .cal-post img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; display:block; margin-bottom:4px;}
+  .cal-post-label{font-size:10.5px; font-weight:700; color:var(--ink); line-height:1.3;}
+
   .legend{display:flex; gap:20px; flex-wrap:wrap; padding:20px 0; font-size:13px; color:var(--ink-faint); border-bottom:1px solid var(--hairline); margin-bottom:8px;}
   .legend b{color:var(--ink);}
 
@@ -64,6 +88,39 @@
   }
 
   footer{padding:40px 0 60px; text-align:center; font-size:12.5px; color:var(--ink-faint);}
+
+  /* ---------- lightbox (sem JavaScript, só CSS :target) ---------- */
+  .lightbox{
+    display:none;
+    position:fixed; inset:0; z-index:200;
+    background:rgba(20,18,16,0.86);
+    align-items:center; justify-content:center;
+    padding:20px; overflow-y:auto;
+  }
+  .lightbox:target{display:flex;}
+  .lb-box{
+    background:var(--card); border-radius:16px; max-width:760px; width:100%;
+    max-height:92vh; overflow-y:auto; padding:28px; position:relative;
+  }
+  .lb-close{
+    position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
+    background:var(--bg); border:1px solid var(--hairline); color:var(--ink-soft);
+    display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:16px;
+  }
+  .lb-imgs{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;}
+  .lb-imgs img{width:100%; max-width:320px; border-radius:10px; display:block; flex:1 1 260px;}
+  .lb-date{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:0.04em;
+    color:#fff; background:var(--accent); padding:5px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .lb-pillar{font-size:12px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;}
+  .lb-box h3{font-size:20px; margin:0 0 12px;}
+  .lb-caption{font-size:14.5px; color:var(--ink-soft); line-height:1.65; white-space:pre-line; margin:0 0 20px;}
+  .lb-downloads{display:flex; gap:10px; flex-wrap:wrap;}
+  .lb-downloads a{
+    display:inline-block; font-size:13px; font-weight:600; color:#fff;
+    background:var(--accent); border-radius:999px; padding:9px 18px; text-decoration:none;
+  }
 </style>
 </head>
 <body>
@@ -75,6 +132,87 @@
     <h1>Sier Móveis — Calendário Editorial</h1>
     <p>Cronograma de publicações das coleções Roberta e Soma — três posts por semana, começando quinta-feira 15/10.</p>
   </header>
+
+  <section id="feed">
+    <p class="s-kicker">Prévia</p>
+    <h2>Como o feed vai ficar</h2>
+    <p class="s-sub">Simulação do grid do Instagram, do mais recente pro mais antigo. Toque em qualquer imagem pra ver ela grande.</p>
+    <div class="feed-grid">
+      <a href="#lb-6"><img src="images/soma-3.png" alt="Soma — A Proporção"></a>
+      <a href="#lb-5"><img src="images/soma-2-1.png" alt="Soma — O Conceito"></a>
+      <a href="#lb-4"><img src="images/soma-1.png" alt="Soma — O Detalhe"></a>
+      <a href="#lb-3"><img src="images/roberta-3-1.png" alt="Roberta — O Ritmo"></a>
+      <a href="#lb-2"><img src="images/roberta-2.png" alt="Roberta — A Apresentação"></a>
+      <a href="#lb-1"><img src="images/roberta-1.png" alt="Roberta — A Delicadeza"></a>
+    </div>
+  </section>
+
+  <section id="calendario">
+    <p class="s-kicker">Cronograma</p>
+    <h2>Calendário de outubro</h2>
+    <p class="s-sub">Toque num card pra ver a imagem grande e baixar, se quiser.</p>
+    <div class="cal-scroll">
+      <div class="cal-table">
+        <div class="cal-head">Dom</div><div class="cal-head">Seg</div><div class="cal-head">Ter</div>
+        <div class="cal-head">Qua</div><div class="cal-head">Qui</div><div class="cal-head">Sex</div><div class="cal-head">Sáb</div>
+
+        <div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div>
+        <div class="cal-cell"><div class="cal-daynum">1</div></div>
+        <div class="cal-cell"><div class="cal-daynum">2</div></div>
+        <div class="cal-cell"><div class="cal-daynum">3</div></div>
+
+        <div class="cal-cell"><div class="cal-daynum">4</div></div>
+        <div class="cal-cell"><div class="cal-daynum">5</div></div>
+        <div class="cal-cell"><div class="cal-daynum">6</div></div>
+        <div class="cal-cell"><div class="cal-daynum">7</div></div>
+        <div class="cal-cell"><div class="cal-daynum">8</div></div>
+        <div class="cal-cell"><div class="cal-daynum">9</div></div>
+        <div class="cal-cell"><div class="cal-daynum">10</div></div>
+
+        <div class="cal-cell"><div class="cal-daynum">11</div></div>
+        <div class="cal-cell"><div class="cal-daynum">12</div></div>
+        <div class="cal-cell"><div class="cal-daynum">13</div></div>
+        <div class="cal-cell"><div class="cal-daynum">14</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">15</div>
+          <a class="cal-post" href="#lb-1"><img src="images/roberta-1.png" alt=""><span class="cal-post-label">Roberta · A Delicadeza</span></a>
+        </div>
+        <div class="cal-cell"><div class="cal-daynum">16</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">17</div>
+          <a class="cal-post" href="#lb-2"><img src="images/roberta-2.png" alt=""><span class="cal-post-label">Roberta · A Apresentação</span></a>
+        </div>
+
+        <div class="cal-cell"><div class="cal-daynum">18</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">19</div>
+          <a class="cal-post" href="#lb-3"><img src="images/roberta-3-1.png" alt=""><span class="cal-post-label">Roberta · O Ritmo</span></a>
+        </div>
+        <div class="cal-cell"><div class="cal-daynum">20</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">21</div>
+          <a class="cal-post" href="#lb-4"><img src="images/soma-1.png" alt=""><span class="cal-post-label">Soma · O Detalhe</span></a>
+        </div>
+        <div class="cal-cell"><div class="cal-daynum">22</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">23</div>
+          <a class="cal-post" href="#lb-5"><img src="images/soma-2-1.png" alt=""><span class="cal-post-label">Soma · O Conceito</span></a>
+        </div>
+        <div class="cal-cell"><div class="cal-daynum">24</div></div>
+
+        <div class="cal-cell"><div class="cal-daynum">25</div></div>
+        <div class="cal-cell">
+          <div class="cal-daynum">26</div>
+          <a class="cal-post" href="#lb-6"><img src="images/soma-3.png" alt=""><span class="cal-post-label">Soma · A Proporção</span></a>
+        </div>
+        <div class="cal-cell"><div class="cal-daynum">27</div></div>
+        <div class="cal-cell"><div class="cal-daynum">28</div></div>
+        <div class="cal-cell"><div class="cal-daynum">29</div></div>
+        <div class="cal-cell"><div class="cal-daynum">30</div></div>
+        <div class="cal-cell"><div class="cal-daynum">31</div></div>
+      </div>
+    </div>
+  </section>
 
   <div class="legend">
     <span><b>6</b> posts programados</span>
@@ -193,5 +331,114 @@ Soma.</p>
   <footer>Cafecomigor · calendário editorial Sier Móveis</footer>
 
 </div>
+
+<!-- ======== LIGHTBOXES (abrem via #lb-N, sem JavaScript) ======== -->
+
+<div class="lightbox" id="lb-1">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Qui · 15/10/2026</span>
+    <div class="lb-pillar">Roberta — Post 1</div>
+    <h3>A Delicadeza</h3>
+    <div class="lb-imgs"><img src="images/roberta-1.png" alt="Roberta — A Delicadeza"></div>
+    <p class="lb-caption">Existem momentos em que observar é o bastante. Com a Roberta, é preciso sentir. O encosto nasce de uma única curva, contínua e acabada com tanta delicadeza que o olhar desliza e a mão decide ficar. Sem arestas. Sem pressa. Um desenho que se compreende pelo toque.
+
+Roberta. Feita para ser sentida.</p>
+    <div class="lb-downloads"><a href="images/roberta-1.png" download>Baixar imagem ↓</a></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lb-2">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Sáb · 17/10/2026</span>
+    <div class="lb-pillar">Roberta — Post 2</div>
+    <h3>A Apresentação</h3>
+    <div class="lb-imgs"><img src="images/roberta-2.png" alt="Roberta — A Apresentação"></div>
+    <p class="lb-caption">Apresentamos a Roberta.
+
+Uma cadeira de presença serena. Estrutura em madeira de linhas leves, assento estofado e proporções desenhadas para a mesa e, na mesma medida, para o olhar. Um design atemporal que dispensa explicações e, simplesmente, permanece.
+
+Roberta.</p>
+    <div class="lb-downloads"><a href="images/roberta-2.png" download>Baixar imagem ↓</a></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lb-3">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Seg · 19/10/2026</span>
+    <div class="lb-pillar">Roberta — Post 3 · Carrossel (2 fotos)</div>
+    <h3>O Ritmo</h3>
+    <div class="lb-imgs">
+      <img src="images/roberta-3-1.png" alt="Roberta — O Ritmo (1)">
+      <img src="images/roberta-3-2.png" alt="Roberta — O Ritmo (2)">
+    </div>
+    <p class="lb-caption">Uma. Depois outra. Depois cinco.
+
+A cadeira Roberta entrega o que é o verdadeiro ritmo: a mesma curva no encosto, a mesma leveza nas pernas, a mesma elegância em cadência. Em uma mesa posta, ela deixa de ser apenas uma peça e vira arquitetura. Um único desenho. Múltiplas composições.
+
+Roberta.</p>
+    <div class="lb-downloads">
+      <a href="images/roberta-3-1.png" download>Baixar foto 1 ↓</a>
+      <a href="images/roberta-3-2.png" download>Baixar foto 2 ↓</a>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lb-4">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Qua · 21/10/2026</span>
+    <div class="lb-pillar">Soma — Post 1</div>
+    <h3>O Detalhe</h3>
+    <div class="lb-imgs"><img src="images/soma-1.png" alt="Soma — O Detalhe"></div>
+    <p class="lb-caption">No Soma, o detalhe é o discurso.
+
+Sobre a laca off white, um recorte sutil dispensa o puxador e convida ao gesto. Duas texturas, um único encontro, nenhum ruído visual.
+
+Soma. Quando o silêncio também é design.</p>
+    <div class="lb-downloads"><a href="images/soma-1.png" download>Baixar imagem ↓</a></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lb-5">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Sex · 23/10/2026</span>
+    <div class="lb-pillar">Soma — Post 2 · Carrossel (2 fotos)</div>
+    <h3>O Conceito</h3>
+    <div class="lb-imgs">
+      <img src="images/soma-2-1.png" alt="Soma — O Conceito (1)">
+      <img src="images/soma-2-2.png" alt="Soma — O Conceito (2)">
+    </div>
+    <p class="lb-caption">Soma não é só um nome. É o princípio construtivo.
+
+Os tons amadeirados que aquecem, a laca off white que acalma, o aço carbono que sustenta. Cada matéria é inteira por si e, juntas, revelam algo maior do que a soma das partes. Por fora, a calma de uma superfície contínua. Por dentro, a nobreza da madeira que se revela quando as portas se abrem.
+
+Soma. Matéria que se completa.</p>
+    <div class="lb-downloads">
+      <a href="images/soma-2-1.png" download>Baixar foto 1 ↓</a>
+      <a href="images/soma-2-2.png" download>Baixar foto 2 ↓</a>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lb-6">
+  <div class="lb-box">
+    <a href="#" class="lb-close">✕</a>
+    <span class="lb-date">Seg · 26/10/2026</span>
+    <div class="lb-pillar">Soma — Post 3</div>
+    <h3>A Proporção</h3>
+    <div class="lb-imgs"><img src="images/soma-3.png" alt="Soma — A Proporção"></div>
+    <p class="lb-caption">Proporção não se improvisa.
+
+Do tampo de cantos suaves ao contorno amadeirado que abraça o acabamento em off white. Do pé fino em aço carbono que faz o buffet flutuar, à precisão do seu volume no espaço. O Soma foi desenhado para ser admirado de perto e de longe, de cima e de lado, e continuar exato em todos os ângulos. Uma peça que marca a sala justamente pelo que escolheu não exibir em excesso.
+
+Soma.</p>
+    <div class="lb-downloads"><a href="images/soma-3.png" download>Baixar imagem ↓</a></div>
+  </div>
+</div>
+
 </body>
 </html>
