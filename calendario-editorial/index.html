@@ -40,8 +40,15 @@
 
   /* ---------- prévia do feed ---------- */
   .feed-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:5px;}
-  .feed-grid a{display:block;}
-  .feed-grid img{width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border-radius:3px;}
+  .feed-grid a{display:block; position:relative;}
+  .feed-grid img{
+    width:100%; aspect-ratio:1/1; object-fit:cover; display:block; border-radius:3px;
+    transition:transform .25s ease, box-shadow .25s ease; cursor:pointer;
+  }
+  .feed-grid a:hover img{
+    transform:scale(1.08); position:relative; z-index:3;
+    box-shadow:0 10px 26px rgba(0,0,0,0.22);
+  }
 
   /* ---------- calendário ---------- */
   .cal-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch;}
@@ -51,7 +58,14 @@
   .cal-cell.empty{background:var(--bg);}
   .cal-daynum{font-size:12px; color:var(--ink-faint); margin-bottom:6px;}
   .cal-post{display:block; text-decoration:none; color:inherit;}
-  .cal-post img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; display:block; margin-bottom:4px;}
+  .cal-post img{
+    width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:6px; display:block; margin-bottom:4px;
+    transition:transform .25s ease, box-shadow .25s ease; cursor:pointer;
+  }
+  .cal-post:hover img{
+    transform:scale(1.5); position:relative; z-index:3;
+    box-shadow:0 14px 30px rgba(0,0,0,0.28);
+  }
   .cal-post-label{font-size:10.5px; font-weight:700; color:var(--ink); line-height:1.3;}
 
   .legend{display:flex; gap:20px; flex-wrap:wrap; padding:20px 0; font-size:13px; color:var(--ink-faint); border-bottom:1px solid var(--hairline); margin-bottom:8px;}
