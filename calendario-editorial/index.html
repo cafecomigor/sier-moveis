@@ -77,6 +77,11 @@
   .post .imgs{display:flex; gap:8px; flex:0 0 auto;}
   .post .imgs img{
     width:140px; height:175px; object-fit:cover; border-radius:10px; border:1px solid var(--hairline); display:block;
+    transition:transform .25s ease, box-shadow .25s ease; cursor:pointer;
+  }
+  .post .imgs img:hover{
+    transform:scale(1.12); position:relative; z-index:3;
+    box-shadow:0 14px 28px rgba(0,0,0,0.22);
   }
   .post .info{flex:1 1 auto; min-width:0;}
   .post .date-badge{
@@ -100,6 +105,18 @@
     .post .imgs{flex-direction:row; flex-wrap:wrap;}
     .post .imgs img{width:120px; height:150px;}
   }
+
+  .download-fold{
+    padding:52px 0; text-align:center; border-bottom:1px solid var(--hairline);
+  }
+  .download-fold h2{font-size:22px; margin:0 0 10px;}
+  .download-fold p{color:var(--ink-soft); font-size:14.5px; margin:0 0 24px;}
+  .download-fold .dl-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--accent); color:#fff; text-decoration:none;
+    font-size:15px; font-weight:700; padding:16px 32px; border-radius:999px;
+  }
+  .download-fold .dl-btn:hover{filter:brightness(0.92);}
 
   footer{padding:40px 0 60px; text-align:center; font-size:12.5px; color:var(--ink-faint);}
 
@@ -340,6 +357,12 @@ Do tampo de cantos suaves ao contorno amadeirado que abraça o acabamento em off
 Soma.</p>
       <div class="downloads"><a href="images/soma-3.png" download>Baixar imagem ↓</a></div>
     </div>
+  </div>
+
+  <div class="download-fold">
+    <h2>Quer baixar tudo de uma vez?</h2>
+    <p>Acesse a pasta no Google Drive com todas as imagens do cronograma, em alta resolução.</p>
+    <a class="dl-btn" href="https://drive.google.com/drive/folders/14i3arzonnIGfSTmxP-ePARlvXOt5a2jV" target="_blank" rel="noopener">Baixar cronograma completo ↓</a>
   </div>
 
   <footer>Cafecomigor · calendário editorial Sier Móveis</footer>
